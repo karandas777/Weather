@@ -18,26 +18,27 @@ export default class Wcard extends Component {
     Axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${this.props.city}&appid=0dad4b498ac26bbee3a517cdae37c63a&units=metric`
     ).then((res) => {
-      console.log(res.data);
       const obj = {
         name: res.data.name,
-        country:res.data.sys.country,
-        temp: res.data.main.temp,
+        temp: Math.floor(res.data.main.temp),
+        country: res.data.sys.country,
         icon: `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`,
         desc: res.data.weather[0].main,
-        day:res.data.weather[0].icon.slice(-1)
+        day: res.data.weather[0].icon.slice(-1),
       };
       this.setState({ details: obj });
     });
   };
 
   render() {
-    const { name,country, temp, icon, desc, day } = this.state.details;
+    const { name, temp, country, icon, desc, day } = this.state.details;
 
-    if(this.state.details === ""){
-        return (
-            <div className="p-3 h1 text-center bg-light rounded-lg shadow-sm mb-3 text-dark">Loading...</div>
-        )
+    if (this.state.details === "") {
+      return (
+        <div className="p-3 h1 text-center bg-light rounded-lg shadow-sm mb-3 text-dark">
+          Loading...
+        </div>
+      );
     }
 
     return (
@@ -46,24 +47,38 @@ export default class Wcard extends Component {
           day === "d" ? "day-card" : "night-card"
         }`}
       >
-        <div className="h3 mb-0">
-          <img
-            src={icon}
-            alt="icon"
-            className="rounded-pill mb-1 mr-2 bg-trans-light p-1"
-            width="50"
-            height="50"
-          />
-          {name}{" "}
-          <div className="d-inline-block h6 float-right">
-            {temp}
-            <span className="small">
-              <sup>o</sup>C
-            </span>
+        <div className="row m-0 p-0">
+          <div className="col-3 m-0 p-0 text-center">
+            <img
+              src={icon}
+              alt="icon"
+              className="rounded-pill mt-2 bg-trans-light w-75"
+             
+            />
+            
           </div>
-        </div>
-        <div className="mb-0 mt-1 small">
-            <i className="fa fa-map-marker"></i> {country} <span className="float-right">{desc}</span>
+          <div className="col-9 m-0">
+
+            <div className="h5 mb-2">
+              {name}, {country}
+            </div>
+
+            <div className="h3">
+              {
+                day === "d" ? 
+                (<i className="fa fa-thermometer-half mr-2 text-warning"></i>) : 
+                (<i className="fa fa-thermometer-half mr-2 text-danger"></i>)
+              }
+            
+              {temp}
+              <span className="small">
+                <sup>o</sup>C
+              </span>
+            </div>
+
+            <div className="ultra-small">{desc}</div>
+            
+          </div>
         </div>
       </div>
     );
