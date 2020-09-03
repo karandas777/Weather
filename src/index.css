@@ -22,6 +22,10 @@ body {
   background: linear-gradient(to right, #f46b45, #eea849);
 }
 
+.text-evening{
+  color:#f46b45;
+}
+
 .night-card{
   background-color: #203a43;
 }
