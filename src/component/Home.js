@@ -53,12 +53,13 @@ export default class Home extends Component {
 
   funAddToList = () => {
     Axios.get(
-      `http://api.weatherstack.com/current?access_key=3c0780bcaf98a4116551a462917e53d9&query=${this.state.city}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=0dad4b498ac26bbee3a517cdae37c63a&units=metric`
     )
       .then((res) => {
-        if (res.data.success !== false) {
+        console.log(res);
+        if (res.status === 200) {
           this.setState(
-            { cityList: [...this.state.cityList, res.data.location.name] },
+            { cityList: [...this.state.cityList, res.data.name] },
             () => {
               this.setState({ city: "", modal: false, error: false });
               const list = JSON.stringify(this.state.cityList);
@@ -70,6 +71,7 @@ export default class Home extends Component {
         }
       })
       .catch((err) => {
+        this.setState({ error: true });
         console.log(err);
       });
   };

@@ -20,7 +20,7 @@ export default class Details extends Component {
 
   funGetWeather = () => {
     Axios.get(
-      `http://api.weatherstack.com/current?access_key=3c0780bcaf98a4116551a462917e53d9&query=${this.state.req_city}`
+      // `http://api.weatherstack.com/current?access_key=3c0780bcaf98a4116551a462917e53d9&query=${this.state.req_city}`
     )
       .then((res) => {
         if (res.data.success !== false) {

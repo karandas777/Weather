@@ -16,15 +16,16 @@ export default class Wcard extends Component {
 
   funGetDetails = () => {
     Axios.get(
-      `http://api.weatherstack.com/current?access_key=3c0780bcaf98a4116551a462917e53d9&query=${this.props.city}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${this.props.city}&appid=0dad4b498ac26bbee3a517cdae37c63a&units=metric`
     ).then((res) => {
+      console.log(res.data);
       const obj = {
-        name: res.data.location.name,
-        country:res.data.location.country,
-        temp: res.data.current.temperature,
-        icon: res.data.current.weather_icons[0],
-        desc: res.data.current.weather_descriptions[0],
-        day: res.data.current.is_day,
+        name: res.data.name,
+        country:res.data.sys.country,
+        temp: res.data.main.temp,
+        icon: `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`,
+        desc: res.data.weather[0].main,
+        day:res.data.weather[0].icon.slice(-1)
       };
       this.setState({ details: obj });
     });
@@ -35,28 +36,28 @@ export default class Wcard extends Component {
 
     if(this.state.details === ""){
         return (
-            <div className="p-3 h1 text-center bg-light text-dark">Loading...</div>
+            <div className="p-3 h1 text-center bg-light rounded-lg shadow-sm mb-3 text-dark">Loading...</div>
         )
     }
 
     return (
       <div
         className={`rounded-lg p-3 mb-3 border-0 text-light shadow-sm h-100 ${
-          day === "yes" ? "day-card" : "night-card"
+          day === "d" ? "day-card" : "night-card"
         }`}
       >
         <div className="h3 mb-0">
           <img
             src={icon}
             alt="icon"
-            className="rounded-pill mb-1 mr-2"
-            width="40"
-            height="40"
+            className="rounded-pill mb-1 mr-2 bg-trans-light p-1"
+            width="50"
+            height="50"
           />
           {name}{" "}
-          <div className="d-inline-block float-right">
+          <div className="d-inline-block h6 float-right">
             {temp}
-            <span className="h5">
+            <span className="small">
               <sup>o</sup>C
             </span>
           </div>
