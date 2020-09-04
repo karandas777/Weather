@@ -81,7 +81,7 @@ export default class Home extends Component {
       <div className="py-3 h-100">
 
         {/* logo */}
-        <div className="col-md-6 mb-3 mx-auto">
+        <div className="col-md-6 mx-auto">
         <LogoHolder/>
         </div>
 
@@ -164,11 +164,14 @@ export default class Home extends Component {
         <div className="col-md-6 mx-auto mb-3">
           <div className="d-flex justify-content-between">
             <button className="btn btn-secondary shadow-sm" onClick={this.funSetEdit}>
-              {this.state.edit ? "Done" : "Edit"}
+              {this.state.edit ? "Done" : (<i className="fa fa-pencil-square"></i>)}
             </button>
-            <button className="btn btn-primary shadow-sm" onClick={this.funSetModal}>
+            {this.state.edit || this.state.modal ? null : (
+              <button className="btn btn-primary shadow-sm" onClick={this.funSetModal}>
               Add City
-            </button>
+              </button>
+            )}
+            
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 html{
   scroll-behavior: smooth;
@@ -60,7 +60,7 @@ body {
 }
 
 .brand{
-  font-family: 'Racing Sans One', cursive;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .ultra-small{

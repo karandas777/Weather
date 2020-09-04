@@ -192,14 +192,14 @@ export default class Details extends Component {
 
           {/* home navigator */}
 
-          <div className="pt-3  text-center">
+          <div className="pt-3 text-center">
             <Link
-              className={`btn btn-link text-decoration-none ${
-                day === "d" ? "text-secondary" : "text-light"
+              className={`btn text-light btn-link text-decoration-none px-4 rounded-lg ${
+                day === "d" ? "bg-trans-dark" : "bg-trans-light"
               } `}
               to="/"
             >
-              <i className="fa fa-arrow-circle-o-left fa-2x"></i>
+              <i className="fa fa-arrow-left"></i>
             </Link>
           </div>
         </div>
